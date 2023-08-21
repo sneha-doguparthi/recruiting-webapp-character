@@ -1,38 +1,42 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import './App.css';
+import {ClassList} from "./ClassList";
+import { CLASS_LIST, } from './consts.js';
+import { AttributeList } from './AttributeList';
 
 function Character({ character }) {
-    const [attributeValues, setAttributeValues] = useState(character.attributes);
-    const attributesTitle = "Attributes"
+  const [attributeValues, setAttributeValues] = useState(character.attributes);
 
-    const incrementAttributeValue = (attribute) => {
-        setAttributeValues((prevValues) => ({
-            ...prevValues,
-            [attribute]: prevValues[attribute] + 1,
-        }));
+  const incrementAttribute = (attribute) => {
+      setAttributeValues((prevValues) => ({
+        ...prevValues,
+        [attribute]: prevValues[attribute] + 1,
+      }));
+  };
+
+  const decrementAttribute = (attribute) => {
+    setAttributeValues((prevValues) => ({
+      ...prevValues,
+      [attribute]: prevValues[attribute] - 1,
+    }));
+  };
+
+  const doesCharacterMeetRequirements = useMemo(() => {
+    return (className) => {
+      const classAttributeValues = CLASS_LIST[className];
+      return Object.keys(classAttributeValues).every(
+        (attribute) => attributeValues[attribute] >= classAttributeValues[attribute]
+      );
     };
+  }, [attributeValues]);
 
-    const decrementAttributeValue = (attribute) => {
-        setAttributeValues((prevValues) => ({
-            ...prevValues,
-            [attribute]: prevValues[attribute] - 1,
-        }));
-    };
-
-    return (
-        <div >
-            <h2>{character.name}</h2>
-            <h2>{attributesTitle}</h2>
-            {Object.keys(attributeValues).map((attribute) => (
-                <div key={attribute}>
-                    {attribute}:
-                    <span>{attributeValues[attribute]}</span>
-                    <button onClick={() => incrementAttributeValue(attribute)}>+</button>
-                    <button onClick={() => decrementAttributeValue(attribute)}>-</button>
-                </div>
-            ))}
-        </div>
-    );
+  return (
+    <div >
+      <h2>{character.name}</h2>
+      <AttributeList attributeValues={attributeValues} incrementAttribute={incrementAttribute} decrementAttribute={decrementAttribute} />
+      <ClassList doesCharacterMeetRequirements={doesCharacterMeetRequirements}/>
+    </div>
+  );
 }
 
 export default Character;

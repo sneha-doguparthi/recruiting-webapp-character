@@ -1,0 +1,10 @@
+.available {
+    font-weight: bold;
+    color: red;
+    cursor: pointer;
+  }
+  
+  .unavailable {
+    font-style: italic;
+    cursor: pointer;
+  }
