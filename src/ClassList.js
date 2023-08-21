@@ -14,9 +14,9 @@ export function ClassList({ doesCharacterMeetRequirements }) {
     return (
         <><div>
             <h2>{classeTitle}</h2>
-            {Object.keys(CLASS_LIST).map((ele) => (
-                <div key={ele} className={doesCharacterMeetRequirements(ele) ? 'meets-requirements' : 'does-not-meet-requirements'} onClick={() => onClassClick(ele)}>
-                    {ele}
+            {Object.keys(CLASS_LIST).map((classElement) => (
+                <div key={classElement} className={doesCharacterMeetRequirements(classElement) ? 'meets-requirements' : 'does-not-meet-requirements'} onClick={() => onClassClick(classElement)}>
+                    {classElement}
                 </div>
             ))}
         </div>

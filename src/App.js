@@ -20,8 +20,8 @@ function App() {
       <header className="App-header">
         <h1>{codingExerciseTitle}</h1>
       </header>
-      <div>
-        {characters && characters.map((character, index) => (
+      <div className="character-container-wrapper">
+        {characters.map((character, index) => (
           <section key={index} className="character-section">
             <Character character={character} />
           </section>
