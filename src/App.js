@@ -1,29 +1,32 @@
-import { useState } from 'react';
 import './App.css';
-import { ATTRIBUTE_LIST, CLASS_LIST, SKILL_LIST } from './consts.js';
-
+import { ATTRIBUTE_LIST } from './consts.js';
+import Character from './Character';
 
 function App() {
   const codingExerciseTitle = "React Coding Exercise"
   const attributeList = ATTRIBUTE_LIST.reduce((acc, attribute) => {
-    acc[attribute] = 10;
+    acc[attribute] = 5;
     return acc;
   }, {});
 
-  const [num, setNum] = useState(0);
+  const characters = [
+    { name: 'Character1', attributes: attributeList },
+    { name: 'Character2', attributes: attributeList },
+    { name: 'Character3', attributes: attributeList }
+  ];
+
   return (
     <div className="App">
       <header className="App-header">
-      <h1>{codingExerciseTitle}</h1>
+        <h1>{codingExerciseTitle}</h1>
       </header>
-      <section className="App-section">
-        <div>
-          Value:
-          {num}
-          <button>+</button>
-          <button>-</button>
-        </div>
-      </section>
+      <div>
+        {characters && characters.map((character, index) => (
+          <section key={index} className="character-section">
+            <Character character={character} />
+          </section>
+        ))}
+      </div>
     </div>
   );
 }
