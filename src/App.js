@@ -5,7 +5,7 @@ import Character from './Character';
 function App() {
   const codingExerciseTitle = "React Coding Exercise"
   const attributeList = ATTRIBUTE_LIST.reduce((acc, attribute) => {
-    acc[attribute] = 5;
+    acc[attribute] = 10;
     return acc;
   }, {});
 

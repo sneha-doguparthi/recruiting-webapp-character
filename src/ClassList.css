@@ -1,10 +1,10 @@
-.available {
+.meets-requirements {
     font-weight: bold;
     color: red;
     cursor: pointer;
   }
   
-  .unavailable {
+  .does-not-meet-requirements {
     font-style: italic;
     cursor: pointer;
   }
